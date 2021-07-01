@@ -4,8 +4,13 @@ import Loading from './Loading';
 import Error from './Error';
 import ReservationForm from './ReservationForm';
 
+interface Reservation {
+  name: string;
+  _id: number | string;
+}
+
 const Reservations = () => {
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 

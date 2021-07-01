@@ -3,9 +3,14 @@ import dishes from '../data/menu.json';
 import { useState } from 'react';
 import DishComments from './DishComments';
 import upperName from '../helpers/lib';
+import { Dish } from '../types/interfaces';
 
-const Home = ({ title }) => {
-  const [selected, setSelected] = useState(null);
+interface HomeComponentProps {
+  title: string;
+}
+
+const Home = ({ title }: HomeComponentProps) => {
+  const [selected, setSelected] = useState<Dish | null>(null);
 
   return (
     <Container>
@@ -14,7 +19,7 @@ const Home = ({ title }) => {
           <h1>Welcome to {upperName(title)}!</h1>
           <h3 className="text-center mb-4">We can only cook pasta...</h3>
           <Carousel>
-            {dishes.map((dish, i) => (
+            {dishes.map((dish: Dish, i) => (
               <Carousel.Item
                 key={dish.id}
                 onClick={() => {
@@ -34,7 +39,7 @@ const Home = ({ title }) => {
             ))}
           </Carousel>
         </Col>
-        <DishComments selectedPasta={selected} />
+        {selected && <DishComments selectedPasta={selected} />}
       </Row>
     </Container>
   );
